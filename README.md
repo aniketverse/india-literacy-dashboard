@@ -41,3 +41,11 @@ MoSPI PLFS 2025 Annual Report, Table 7; Census of India 2011 PCA, C-08 and C-13 
 - Plotly charts now use transparent dark canvases, brighter colour palette, cleaner gridlines and custom hover labels.
 - Fixed the state tile map rendering call so the map actually populates on the Census overview tab.
 - All original PLFS and Census data files remain unchanged.
+
+
+## Version 5 — Geographic exploration
+- Added a true clickable India state-boundary choropleth (not a tile grid).
+- State polygons are shaded by selected Census 2011 indicator: overall, male/female literacy, gender gap, literate or illiterate population.
+- Clicking a state loads its district boundary layer and joins Census 2011 PCA district records by normalized district name.
+- Boundary data is fetched on demand from Hari31416/india-geojson-assets (versioned display GeoJSON; see repository README for source details). District boundaries may reflect a different administrative vintage than Census 2011. Unmatched newer/renamed districts are left uncoloured; the table remains the authoritative Census 2011 record.
+- Map boundary files are fetched from the external repository at runtime to keep this GitHub Pages package lightweight. Internet access is required for the geographic layer.
