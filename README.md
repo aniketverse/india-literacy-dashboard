@@ -1,32 +1,35 @@
-# India Literacy Intelligence Dashboard
+# India Literacy Intelligence Dashboard — Version 2
 
-Static GitHub Pages project for exploring Indian literacy data.
+## Deployment
+Upload/replace `index.html` in the repository root and upload the complete `data/` folder contents to the repository's `data/` folder. Keep GitHub Pages set to `main` branch and `/ (root)`.
 
-## Current build
-- India-wide PLFS 2025 headline literacy rate: 81.1% (age 7+).
-- State/UT PLFS 2025 literacy estimates split by rural, urban and combined residence.
-- Male, female and persons rates, with gender-gap calculations.
-- Interactive charts, residence/gender selectors and state search.
-- Official sources and methodology notes.
+## Files
+- `index.html`: four-section responsive dashboard.
+- `data/plfs_2025_total.csv`, `data/plfs_2025_rural.csv`, `data/plfs_2025_urban.csv`: PLFS 2025 state/UT estimates from the starter build.
+- `data/census2011_dashboard.json`: dashboard-ready summaries from C-08, C-13 Appendix A and PCA.
+- `data/census2011_state_district.csv`: district-level PCA extract.
+- `data/metadata.json`: original PLFS metadata.
 
-## Data files
-- `data/plfs_2025_total.csv`
-- `data/plfs_2025_rural.csv`
-- `data/plfs_2025_urban.csv`
-- `data/metadata.json`
+## Dashboard sections
+1. Latest estimates: PLFS 2025.
+2. Census overview: national counts, rural/urban rates, state rankings.
+3. District explorer: state, residence and district filters.
+4. Age & education: C-13 single-year age records aggregated into age bands, plus C-08 educational attainment.
 
-## Planned next stages
-1. Add Census 2011 state and district population/literate/illiterate counts.
-2. Add Census C-08 age cohorts by sex and residence.
-3. Add state population rankings, literate/illiterate population rankings and state explorer.
-4. Add India map and historical comparison series with methodology warnings.
-5. Add metro/city analysis using Census city tables, explicitly marked Census 2011.
+## Methodology
+- PLFS 2025 and Census 2011 are kept in separate tabs because they are different statistical products and reference periods.
+- Census literacy rates use literates divided by population aged 7+.
+- PCA `TOT_P - P_06` is used for population aged 7+; male/female denominators are calculated separately.
+- District rankings use PCA district rows; Census 2011 is historical.
+- C-13 age bands are aggregated from ages 7–99 plus the explicit 100+ category. The 60+ band includes the source's 100+ group; age not stated is excluded.
+- Educational attainment chart uses C-08 category counts for the India Total / All ages row. It represents the distribution of literates by highest reported educational category, not a modern qualification equivalency.
+- Metro/semi-urban categories are not inferred from these datasets.
 
-## Deploy to GitHub Pages
-1. Create a public repository named `india-literacy-dashboard` under `aniketverse`.
-2. Upload the contents of this folder to the repository root (not the folder itself).
-3. In Settings → Pages, select Deploy from a branch, `main`, folder `/ (root)`.
-4. Save. The site should appear at `https://aniketverse.github.io/india-literacy-dashboard/`.
+## Sources
+MoSPI PLFS 2025 Annual Report, Table 7; Census of India 2011 PCA, C-08 and C-13 Appendix A.
 
-## Important methodology
-PLFS 2025 rates are survey estimates, not Census counts. Census 2011 counts and age cohorts are separately labelled. Never infer current population counts by multiplying PLFS rates by Census 2011 population. Metro/semi-urban is not a separate PLFS literacy category.
+
+## Version 3 visual improvements
+- Refined visual system: gradient hero, layered page background, improved card depth, spacing and typography.
+- Added a state literacy tile-map view with colour bands. This is a schematic comparison grid, not a geographic boundary map; the dashboard labels it accordingly.
+- Expanded state ranking metrics to include literate population, illiterate population and total population in addition to literacy rates and gender gap.
