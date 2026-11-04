@@ -49,3 +49,7 @@ MoSPI PLFS 2025 Annual Report, Table 7; Census of India 2011 PCA, C-08 and C-13 
 - Clicking a state loads its district boundary layer and joins Census 2011 PCA district records by normalized district name.
 - Boundary data is fetched on demand from Hari31416/india-geojson-assets (versioned display GeoJSON; see repository README for source details). District boundaries may reflect a different administrative vintage than Census 2011. Unmatched newer/renamed districts are left uncoloured; the table remains the authoritative Census 2011 record.
 - Map boundary files are fetched from the external repository at runtime to keep this GitHub Pages package lightweight. Internet access is required for the geographic layer.
+
+
+### Version 6 map correction
+The geographic choropleth now matches Census state/district names to the exact GeoJSON feature names after normalization, then passes those feature names to Plotly. It also explicitly uses the custom GeoJSON identifier mode and fits the map to the matched India polygons rather than the wider Asia map extent. The map legend reports how many boundary names matched. Census 2011 figures remain unchanged; newer boundary vintages may not align perfectly with 2011 district geography.
