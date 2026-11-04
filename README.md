@@ -53,3 +53,7 @@ MoSPI PLFS 2025 Annual Report, Table 7; Census of India 2011 PCA, C-08 and C-13 
 
 ### Version 6 map correction
 The geographic choropleth now matches Census state/district names to the exact GeoJSON feature names after normalization, then passes those feature names to Plotly. It also explicitly uses the custom GeoJSON identifier mode and fits the map to the matched India polygons rather than the wider Asia map extent. The map legend reports how many boundary names matched. Census 2011 figures remain unchanged; newer boundary vintages may not align perfectly with 2011 district geography.
+
+
+### Version 7 district-map stability fix
+The district map now purges the previous Plotly chart before creating a new one, waits for each render to complete, and ignores stale asynchronous boundary responses when a different state is selected quickly. Returning to the India map also cancels pending district loads and clears the prior chart.
