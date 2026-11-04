@@ -33,3 +33,11 @@ MoSPI PLFS 2025 Annual Report, Table 7; Census of India 2011 PCA, C-08 and C-13 
 - Refined visual system: gradient hero, layered page background, improved card depth, spacing and typography.
 - Added a state literacy tile-map view with colour bands. This is a schematic comparison grid, not a geographic boundary map; the dashboard labels it accordingly.
 - Expanded state ranking metrics to include literate population, illiterate population and total population in addition to literacy rates and gender gap.
+
+
+## Version 4 — Futuristic visual refresh
+- Dark navy / deep-space interface with cyan, teal, electric blue and violet accents.
+- Glass-style panels, subtle grid treatment, glowing interactive state tiles and hover motion.
+- Plotly charts now use transparent dark canvases, brighter colour palette, cleaner gridlines and custom hover labels.
+- Fixed the state tile map rendering call so the map actually populates on the Census overview tab.
+- All original PLFS and Census data files remain unchanged.
