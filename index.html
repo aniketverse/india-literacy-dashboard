@@ -1,126 +1,439 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>India Literacy Intelligence Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aniketverse | India Electricity Power Stations</title>
+<link rel="preconnect" href="https://cdn.en.listbase.org" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://raw.githubusercontent.com">
+<link rel="dns-prefetch" href="https://unpkg.com">
 <style>
-:root{--bg:#071326;--panel:#101f38;--ink:#edf5ff;--muted:#91a7c4;--line:#213754;--blue:#4b7cff;--teal:#20e0c0;--orange:#ffad5c;--violet:#a78bfa;--shadow:0 14px 38px #0008}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 8% 0%,#163b68 0,transparent 32%),radial-gradient(ellipse at 95% 18%,#124b53 0,transparent 27%),linear-gradient(135deg,#06101f,#091a30 55%,#071326);color:var(--ink);font:14px 'DM Sans',sans-serif;min-height:100vh;background-attachment:fixed}.wrap{max-width:1440px;margin:auto;padding:24px}.hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#102b52 0%,#174d76 48%,#087c78 100%);border:1px solid #65d8ff45;color:#fff;padding:28px 30px;border-radius:20px;box-shadow:var(--shadow)}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.75}.hero:after{content:'भारत';position:absolute;right:4%;bottom:-45px;font:800 150px Manrope;color:#ffffff0d;pointer-events:none}.hero:before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 49.8%,#8be9ff12 50%,transparent 50.2%),linear-gradient(0deg,transparent 49.8%,#8be9ff12 50%,transparent 50.2%);background-size:34px 34px;mask-image:linear-gradient(90deg,transparent,#000);pointer-events:none}.hero h1{font:800 clamp(25px,4vw,38px) Manrope;margin:10px 0 8px;letter-spacing:-1px}.hero p{margin:0;color:#dbe6fa;max-width:800px;line-height:1.6}.meta{margin-top:18px;display:flex;gap:9px;flex-wrap:wrap}.pill{border:1px solid #ffffff40;padding:6px 10px;border-radius:99px;font-size:11px;color:#e8efff}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid #36506d;background:#10213a;padding:10px 15px;border-radius:10px;font:600 13px 'DM Sans';color:#c9d9ef;cursor:pointer;transition:.2s}.tab.active{background:linear-gradient(120deg,#426dff,#12bfae);color:#fff;border-color:#5bc9ff;box-shadow:0 0 22px #2d9dff55}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:14px 0}.card,.panel{background:linear-gradient(145deg,#132641eF,#0d1b30f2);border:1px solid #4b719655;border-radius:18px;box-shadow:0 14px 34px #0005,inset 0 1px #ffffff0c;transition:transform .22s,border-color .22s,box-shadow .22s;backdrop-filter:blur(12px)}.card:hover,.panel:hover{transform:translateY(-2px);border-color:#42c8d877;box-shadow:0 18px 42px #0007,0 0 22px #20e0c014}.kpi{padding:17px}.kpi small{color:var(--muted);font-weight:600}.value{font:800 29px Manrope;margin:9px 0 4px;letter-spacing:-.8px}.sub{font-size:11px;color:var(--muted)}.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.panel{padding:17px;min-width:0}.panel h2{font:700 16px Manrope;margin:0 0 4px}.desc{font-size:12px;color:var(--muted);margin-bottom:12px}.chart{height:350px}.section{margin:24px 0 12px;font:800 20px Manrope;letter-spacing:-.4px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar select,.toolbar input{border:1px solid #36506d;background:#10213a;padding:10px 12px;border-radius:10px;color:#e7f2ff;font:inherit;min-width:140px}.tablewrap{overflow:auto;max-height:520px}table{border-collapse:collapse;width:100%;font-size:12px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;color:#d8e6f8}th:first-child,td:first-child{text-align:left}th{position:sticky;top:0;background:#1a3150;color:#9fc2e9;font-size:10px;text-transform:uppercase;letter-spacing:.4px}.notice{background:linear-gradient(110deg,#173653,#183b46);border:1px solid #32c9c055;padding:12px 14px;border-radius:12px;color:#c8f5ed;font-size:12px;line-height:1.5;margin:14px 0;box-shadow:inset 0 1px #ffffff0b}.tilemap{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;padding:10px 0}.tile{border-radius:10px;padding:10px 5px;min-height:58px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;font-size:10px;font-weight:700;cursor:pointer;border:1px solid #ffffff45;box-shadow:0 5px 16px #0004;transition:.2s}.tile:hover{transform:translateY(-3px) scale(1.03);filter:brightness(1.2);box-shadow:0 0 18px #4bdcff55}.tile small{font-size:9px;font-weight:500;opacity:.9;margin-top:4px}.legend{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:10px;color:var(--muted)}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px}.insight{background:linear-gradient(120deg,#152c4a,#123b42);border:1px solid #38c8c055;border-radius:14px;padding:14px;font-size:12px;line-height:1.6;color:#d7f8f2}.foot{color:#7f9bbd;font-size:11px;line-height:1.7;margin:20px 2px}.section{color:#e8f4ff}.desc,.sub,.kpi small{color:#91a7c4}.hero p{color:#d7eaff}.pill{background:#ffffff0a}.view{display:none}.view.active{display:block}.empty{padding:30px;color:var(--muted);text-align:center}
- 
-.geomap{height:520px;width:100%;border:1px solid #294866;border-radius:14px;overflow:hidden;background:radial-gradient(ellipse at center,#122c48,#08172a)}
-.districtmap{height:480px}.maphead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.mapselect{background:#10213a;color:#e7f2ff;border:1px solid #36506d;border-radius:10px;padding:10px;max-width:100%}
-.maplegend{font-size:11px;color:#a9c0dc;padding:10px 2px;line-height:1.5}.mapdetail{padding:12px;border-radius:12px;background:linear-gradient(110deg,#142d4a,#103b43);border:1px solid #31c8c055;color:#d9f8f3;font-size:12px;line-height:1.6}
-.mapdetail b{color:#6cecff}.mapstat{display:inline-block;margin:5px 12px 0 0}.mapstat strong{font:700 17px Manrope;color:#fff;display:block}
-.js-plotly-plot .plotly .modebar{display:none!important}
-@media(max-width:700px){.geomap{height:420px}.districtmap{height:400px}.maphead{align-items:stretch}.mapselect{width:100%}}
-@media(max-width:850px){.wrap{padding:13px}.kpis{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.chart{height:310px}.hero{padding:22px}.value{font-size:25px}}
-</style></head><body><main class="wrap">
-<header class="hero"><div class="eyebrow">NATIONAL LITERACY INTELLIGENCE • INDIA</div><h1>India Literacy Intelligence</h1><p>Explore India's literacy landscape through live filters, neon data visualisations, state comparisons and district-level Census intelligence.</p><div class="meta"><span class="pill">PLFS 2025 • survey estimates</span><span class="pill">Census 2011 • historical baseline</span><span class="pill">Literacy definition: age 7+</span></div></header>
-<nav class="tabs"><button class="tab active" data-view="latest">Latest estimates</button><button class="tab" data-view="census">Census overview</button><button class="tab" data-view="districts">District explorer</button><button class="tab" data-view="age">Age & education</button></nav>
-<div id="latest" class="view active">
-<div class="kpis">
-<div class="card kpi"><small>India literacy rate</small><div class="value">81.1%</div><div class="sub">PLFS 2025 • age 7+</div></div><div class="card kpi"><small>Male literacy</small><div class="value">87.5%</div><div class="sub">PLFS 2025 • age 7+</div></div><div class="card kpi"><small>Female literacy</small><div class="value">74.9%</div><div class="sub">PLFS 2025 • age 7+</div></div><div class="card kpi"><small>Gender gap</small><div class="value">12.6 pp</div><div class="sub">Male minus female • PLFS 2025</div></div></div>
-<div class="notice"><b>Interpretation:</b> PLFS 2025 values are survey estimates. Census 2011 population counts and age profiles are historical and must not be read as current population estimates.</div>
-<h2 class="section">PLFS 2025 — State-wise literacy</h2><div class="toolbar"><select id="plfsResidence"><option value="total">All India combined</option><option value="rural">Rural</option><option value="urban">Urban</option></select><select id="plfsGender"><option value="persons">Persons</option><option value="male">Male</option><option value="female">Female</option></select><input id="plfsSearch" placeholder="Search state or UT…"></div>
-<div class="layout"><section class="panel"><h2>State comparison</h2><div class="desc">Literacy rate (%) • PLFS 2025 • age 7+</div><div id="plfsBar" class="chart"></div></section><section class="panel"><h2>Male vs female</h2><div class="desc">State/UT comparison • PLFS 2025</div><div id="plfsGenderChart" class="chart"></div></section></div>
-<section class="panel" style="margin-top:14px"><h2>PLFS state data table</h2><div class="tablewrap"><table id="plfsTable"><thead><tr><th>State / UT</th><th>Male %</th><th>Female %</th><th>Persons %</th><th>Gender gap (pp)</th></tr></thead><tbody></tbody></table></div></section></div>
-<div id="census" class="view">
-<div class="kpis" id="censusKpis"></div><div class="notice"><b>Census 2011 historical baseline.</b> Literacy rate is literate population divided by population aged 7+. Rural and urban counts are separately reported by Census.</div>
-<h2 class="section">National rural–urban comparison</h2><div class="layout"><section class="panel"><h2>Literacy rate by residence</h2><div class="desc">Census 2011 • persons, male and female</div><div id="resChart" class="chart"></div></section><section class="panel"><h2>Literate and illiterate population</h2><div class="desc">Census 2011 • people aged 7+</div><div id="litChart" class="chart"></div></section></div>
-<h2 class="section">Interactive India literacy map</h2><section class="panel"><div class="maphead"><div><h2>State-level geographic view</h2><div class="desc">Tap a state to drill into its districts. Colour scale updates with the selected indicator.</div></div><select id="mapMetric" class="mapselect"><option value="LITERACY_RATE_PCT">Overall literacy</option><option value="LITERACY_RATE_M_PCT">Male literacy</option><option value="LITERACY_RATE_F_PCT">Female literacy</option><option value="GENDER_GAP_PP">Gender gap</option><option value="P_LIT">Literate population</option><option value="P_ILL">Illiterate population</option></select></div><div id="indiaGeoMap" class="geomap"></div><div class="maplegend" id="indiaMapLegend">Loading geographic boundaries…</div><div class="mapdetail" id="indiaMapDetail">Select a state on the map to explore district-level Census 2011 data.</div></section>
-<section class="panel" id="districtGeoPanel" style="margin-top:14px;display:none"><div class="maphead"><div><h2 id="districtGeoTitle">District drill-down</h2><div class="desc">Census 2011 district values matched to available boundary names.</div></div><button class="tab" id="backToIndia">← All India</button></div><div id="districtGeoMap" class="geomap districtmap"></div><div class="maplegend" id="districtMapLegend"></div></section>
-<h2 class="section">State rankings — Census 2011</h2><div class="toolbar"><select id="stateResidence"><option>Total</option><option>Rural</option><option>Urban</option></select><select id="rankMetric"><option value="LITERACY_RATE_PCT">Literacy rate</option><option value="LITERACY_RATE_F_PCT">Female literacy</option><option value="LITERACY_RATE_M_PCT">Male literacy</option><option value="GENDER_GAP_PP">Gender gap</option><option value="P_LIT">Literate population</option><option value="P_ILL">Illiterate population</option><option value="TOT_P">Total population</option></select></div>
-<div class="layout"><section class="panel"><h2>Top 10 states/UTs</h2><div id="topStates" class="chart"></div></section><section class="panel"><h2>Bottom 10 states/UTs</h2><div id="bottomStates" class="chart"></div></section></div>
-</div>
-<div id="districts" class="view"><h2 class="section">District literacy explorer — Census 2011</h2><div class="notice">District figures are historical Census 2011 counts and rates. The literacy denominator is population aged 7+. Use filters to explore the district-level PCA records.</div><div class="toolbar"><select id="districtState"><option value="">All states/UTs</option></select><select id="districtResidence"><option>Total</option><option>Rural</option><option>Urban</option></select><input id="districtSearch" placeholder="Search district…"></div><section class="panel"><div class="desc" id="districtCount"></div><div class="tablewrap"><table id="districtTable"><thead><tr><th>District</th><th>State / UT</th><th>Population</th><th>Literate</th><th>Literacy %</th><th>Male %</th><th>Female %</th><th>Gap pp</th></tr></thead><tbody></tbody></table></div></section></div>
-<div id="age" class="view"><h2 class="section">Age-wise literacy and educational attainment — Census 2011</h2><div class="notice">Age-band literacy rates are calculated from C-13 single-year age counts. Educational attainment counts are from C-08. Both are Census 2011 historical data.</div><div class="layout"><section class="panel"><h2>Literacy by age band</h2><div class="desc">Age 7+ • C-13 Appendix A • persons</div><div id="ageChart" class="chart"></div></section><section class="panel"><h2>Educational attainment</h2><div class="desc">Literate population • C-08 categories • counts</div><div id="eduChart" class="chart"></div></section></div><section class="panel" style="margin-top:14px"><h2>Age-band detail</h2><div class="tablewrap"><table id="ageTable"><thead><tr><th>Age group</th><th>Population</th><th>Literate</th><th>Illiterate</th><th>Literacy %</th></tr></thead><tbody></tbody></table></div></section></div>
-<footer class="foot">Sources: MoSPI, PLFS 2025, Appendix A, Table 7; Census of India 2011, Primary Census Abstract (PCA), C-08 and C-13 Appendix A. <br>PLFS report: <a href="https://mospi.gov.in/uploads/publications_reports/publications_reports1780040415321_0624fb13-fb47-40bc-b470-7c7e9635c3ef_PLFS_2025_F_REV_29052026.pdf" target="_blank" rel="noopener">official PDF</a>. Census catalogues: <a href="https://censusindia.gov.in/nada/index.php/catalog/44790" target="_blank" rel="noopener">C-08</a> · <a href="https://www.censusindia.gov.in/nada/index.php/catalog/1535" target="_blank" rel="noopener">C-13</a> · <a href="https://censusindia.gov.in/nada/index.php/catalog/6191" target="_blank" rel="noopener">PCA</a>. Metro/semi-urban literacy is not separately represented in PLFS; this dashboard does not invent such a category. Interactive boundaries: Hari31416 India GeoJSON assets, simplified display layer; district values are matched by name to Census 2011 and unmatched polygons are left uncoloured.</footer>
-</main>
-<script>
-const $=s=>document.querySelector(s), fmt=n=>Number(n||0).toLocaleString('en-IN'), pct=n=>n==null?'—':Number(n).toFixed(2)+'%';
-let plfs={total:[],rural:[],urban:[]}, census=null;
-async function csv(path){let t=await (await fetch(path)).text(),ls=t.trim().split(/\r?\n/);return ls.slice(1).map(l=>{let a=l.split(',');return {state:a[0],male:a[1]===''?null:+a[1],female:a[2]===''?null:+a[2],persons:a[3]===''?null:+a[3]}})}
-async function init(){for(let r of ['total','rural','urban'])plfs[r]=await csv(`data/plfs_2025_${r}.csv`);census=await (await fetch('data/census2011_dashboard.json')).json();renderPLFS();renderCensus();renderDistricts();renderAge()}
-const NEON=['#4b7cff','#20e0c0','#ffad5c','#b69cff','#ff6b9d','#59d6ff'];
-function plot(id,traces,layout){if(!window.Plotly)return;traces=traces.map((t,i)=>({...t,marker:{...(t.marker||{}),color:t.marker?.color||NEON[i%NEON.length],line:{color:'#ffffff20',width:1},...(t.type==='bar'?{cornerradius:7}:{})},...(t.type==='bar'?{opacity:.96}:{})}));Plotly.react(id,traces,{...layout,paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{family:'DM Sans',color:'#b9cce5',size:11},colorway:NEON,margin:{l:55,r:15,t:18,b:45},autosize:true,hoverlabel:{bgcolor:'#10243c',bordercolor:'#40c9df',font:{color:'#effaff',family:'DM Sans'}},xaxis:{...(layout.xaxis||{}),gridcolor:'#ffffff12',zerolinecolor:'#ffffff22',linecolor:'#36506d',tickfont:{color:'#91a7c4'}},yaxis:{...(layout.yaxis||{}),gridcolor:'#ffffff12',zerolinecolor:'#ffffff22',linecolor:'#36506d',tickfont:{color:'#c5d8ee'}},legend:{...(layout.legend||{}),font:{color:'#b9cce5'}}},{responsive:true,displayModeBar:false})}
-function renderPLFS(){let r=$('#plfsResidence').value,g=$('#plfsGender').value,q=$('#plfsSearch').value.toLowerCase(),rows=plfs[r].filter(x=>x.state.toLowerCase().includes(q)).sort((a,b)=>(b[g]??-1)-(a[g]??-1)),names=rows.map(x=>x.state);plot('plfsBar',[{type:'bar',orientation:'h',y:names.slice().reverse(),x:rows.map(x=>x[g]).reverse(),marker:{color:'#4b7cff'},hovertemplate:'%{y}: %{x:.1f}%<extra></extra>'}],{xaxis:{range:[0,100],title:'Literacy (%)'},yaxis:{automargin:true},margin:{l:145,r:15,t:10,b:40}});plot('plfsGenderChart',[{type:'bar',name:'Male',x:names,y:rows.map(x=>x.male),marker:{color:'#4b7cff'}},{type:'bar',name:'Female',x:names,y:rows.map(x=>x.female),marker:{color:'#ffad5c'}}],{barmode:'group',yaxis:{range:[0,100],title:'Literacy (%)'},xaxis:{tickangle:-55},margin:{l:45,r:10,t:10,b:105},legend:{orientation:'h',y:1.12}});$('#plfsTable tbody').innerHTML=rows.map(x=>`<tr><td>${x.state}</td><td>${pct(x.male)}</td><td>${pct(x.female)}</td><td>${pct(x.persons)}</td><td>${x.male==null||x.female==null?'—':(x.male-x.female).toFixed(1)}</td></tr>`).join('')}
+:root{--navy:#071d3b;--navy2:#0d315d;--blue:#1675d1;--cyan:#11a6c7;--green:#16a56b;--orange:#f28b25;--purple:#7652d6;--pink:#d83d83;--ink:#13243d;--muted:#64748b;--bg:#edf3f9;--line:#dce6f1;--panel:#fff;--shadow:0 10px 28px rgba(15,45,82,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:linear-gradient(180deg,#eaf2fa 0,#f5f8fc 340px,#f3f6fb 100%);color:var(--ink);font:14px/1.5 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+.app-shell{min-height:100vh}.side-nav{position:fixed;inset:0 auto 0 0;width:224px;background:linear-gradient(180deg,#061a35,#0c3765 70%,#09284c);color:#dcecff;padding:22px 14px;z-index:1000;display:flex;flex-direction:column;box-shadow:8px 0 28px rgba(6,25,50,.12)}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 24px;border-bottom:1px solid #ffffff20;margin-bottom:18px}.brand-mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#f7b733,#f47721);display:grid;place-items:center;color:#092346;font-size:22px;font-weight:900;box-shadow:0 5px 16px #f4772140}.brand strong{display:block;color:#fff;font-size:14px;letter-spacing:.2px}.brand small{color:#9fc4e8;font-size:10px;letter-spacing:1.4px;text-transform:uppercase}
+.nav-label{font-size:10px;color:#83a8ce;text-transform:uppercase;letter-spacing:1.5px;padding:10px 11px 7px}.side-nav a{display:flex;align-items:center;gap:11px;color:#c9dcf0;text-decoration:none;padding:11px 12px;border-radius:11px;font-weight:600;font-size:13px;margin:2px 0;transition:.2s}.side-nav a .nav-ico{width:22px;text-align:center;font-size:16px}.side-nav a:hover,.side-nav a.active{background:linear-gradient(90deg,#1675d1,#159ac0);color:#fff;box-shadow:0 7px 18px #0076c54a}.nav-bottom{margin-top:auto;border-top:1px solid #ffffff20;padding:15px 10px 0;color:#8fb4d8;font-size:11px;line-height:1.6}
+.app-content{margin-left:224px;min-width:0}header{position:relative;overflow:hidden;color:#fff;padding:28px clamp(20px,3vw,48px) 30px;background:linear-gradient(110deg,#071a35 0%,#103f71 48%,#087e9d 100%);min-height:170px}header:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 25%,#49c9dc55,transparent 26%),radial-gradient(circle at 66% 100%,#21a66c44,transparent 32%),linear-gradient(90deg,transparent 55%,#ffffff08);pointer-events:none}.hero-inner{position:relative;z-index:2;max-width:1600px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:25px}.hero-kicker{font-size:10px;font-weight:800;letter-spacing:2px;color:#9ce4ee;text-transform:uppercase;margin-bottom:7px}.hero-title{font-size:clamp(26px,3vw,42px);line-height:1.08;letter-spacing:-1.2px;margin:0 0 9px;font-weight:850}.hero-title span{color:#ffc34e}.hero-sub{margin:0;color:#d7eafa;font-size:13px}.hero-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.hero-tags span{border:1px solid #ffffff35;background:#ffffff12;border-radius:99px;padding:5px 10px;color:#eaf7ff;font-size:10px;font-weight:700}.hero-art{width:min(37%,430px);min-width:220px;height:112px;opacity:.95;filter:drop-shadow(0 10px 20px #00182d55)}.hero-art svg{width:100%;height:100%}
+main{max-width:1680px;margin:0 auto;padding:20px clamp(14px,2vw,30px) 40px}.notice{border:1px solid #f3d38b;background:linear-gradient(100deg,#fff8e6,#fffdf7);color:#76520b;padding:12px 15px;border-radius:13px;margin-bottom:14px;box-shadow:0 4px 12px #9b6b1110;font-size:12px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}.toolbar a,.toolbar button{border:0;border-radius:10px;padding:9px 13px;font:700 12px/1.2 Inter,system-ui,Arial;text-decoration:none;cursor:pointer;background:#e7f1fb;color:#17446f;transition:.2s}.toolbar a:first-child{background:#0e70c7;color:#fff}.toolbar a:hover,.toolbar button:hover{transform:translateY(-1px);filter:brightness(.97)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card,.panel{background:var(--panel);border:1px solid #e1eaf3;border-radius:16px;box-shadow:var(--shadow)}.card{padding:16px 17px;position:relative;overflow:hidden;min-height:112px;color:#fff;border:0}.card:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:-28px;top:-38px;background:#ffffff16}.card:nth-child(1){background:linear-gradient(135deg,#0875ca,#123d83)}.card:nth-child(2){background:linear-gradient(135deg,#7544cf,#41248d)}.card:nth-child(3){background:linear-gradient(135deg,#1bb878,#08734e)}.card:nth-child(4){background:linear-gradient(135deg,#e9a126,#df5d18)}.label{font-size:11px;color:#e4f1ff;font-weight:700;letter-spacing:.3px}.value{font-size:clamp(25px,2.4vw,34px);font-weight:850;letter-spacing:-.8px;margin:5px 0 2px;color:#fff;font-variant-numeric:tabular-nums}.sub{font-size:10px;color:#e0edfb}
+.section-kicker{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#1683b9;font-weight:800;margin:0 0 4px}.panel{padding:17px;min-width:0}.panel h2{font-size:16px;margin:0 0 3px;color:#102e57;letter-spacing:-.2px}.hint{font-size:11px;color:var(--muted);margin:0 0 12px}.insight-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}.chart-panel{min-height:300px;position:relative}.chart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}.chart-pill{white-space:nowrap;border-radius:99px;background:#edf5fc;color:#21618f;padding:5px 9px;font-size:9px;font-weight:800}.chart-wrap{height:215px;position:relative}.chart-wrap canvas{max-width:100%;max-height:100%}.chart-note{font-size:10px;color:#77869a;margin:7px 0 0}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:13px;margin-top:13px;align-items:start}.panel h2:before{content:"";display:inline-block;width:5px;height:17px;border-radius:9px;background:linear-gradient(#1b9bd0,#2865cf);margin-right:9px;vertical-align:-3px}.layout>div>.panel:first-child{border-top:3px solid #1687c6}#map{height:560px;border-radius:12px;border:1px solid var(--line);z-index:1;overflow:hidden}.maptools{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:11px 0}.maptools select,.filters input,.filters select{border:1px solid #d9e4ef;border-radius:9px;background:#fff;padding:9px 11px;font:inherit;color:var(--ink);box-shadow:0 2px 5px #173b5b08}.maptools select:focus,.filters input:focus,.filters select:focus{outline:2px solid #a9d9f5;border-color:#5da9d8}.maplegend{display:flex;flex-wrap:wrap;gap:9px;font-size:10px;color:var(--muted);margin:9px 0}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}.sidebar{display:flex;flex-direction:column;gap:12px}.state-list{max-height:380px;overflow:auto}.state-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #edf1f6;font-size:11px}.state-name{flex:1}.state-num{font-weight:800;font-variant-numeric:tabular-nums;color:#173c66}.statebar{height:7px;background:#edf2f8;border-radius:8px;overflow:hidden;width:72px}.statebar i{display:block;height:100%;background:linear-gradient(90deg,#13a5b8,#2568d7);border-radius:8px}.fuel-list{display:flex;flex-wrap:wrap;gap:6px}.chip{background:#f1f6fb;border:1px solid #e0eaf4;padding:6px 9px;border-radius:9px;font-size:10px;color:#284563}.chip b{color:#123e6b}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.filters input{flex:1;min-width:200px}.filters select{min-width:145px}.tablewrap{overflow:auto;max-height:600px;border:1px solid #e1eaf3;border-radius:11px}table{border-collapse:collapse;width:100%;min-width:920px;background:white}th,td{padding:10px 11px;border-bottom:1px solid #e9eff5;text-align:left;font-size:11px}th{position:sticky;top:0;background:#eaf3fb;color:#244b70;z-index:2;white-space:nowrap;cursor:pointer;font-size:10px;text-transform:uppercase;letter-spacing:.4px}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:hover{background:#f1f8fe}.tag{background:#eaf2ff;color:#2a4f99;padding:4px 8px;border-radius:99px;font-size:9px;white-space:nowrap;font-weight:700}.status{font-size:11px;color:var(--muted);margin:9px 0}.source{font-size:11px;color:var(--muted);line-height:1.75}.source a{color:#2459c4}#loadError{display:none;background:#fff0ee;color:#8c2e22;border:1px solid #f2c7c2;border-radius:10px;padding:10px;margin:8px 0}.source-card{margin-top:13px}.source-card .source{font-size:11px}.source-card a{font-weight:700}.table-pager{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:8px}.table-pager button{border:1px solid #d9e4ef;background:#f4f8fc;color:#17446f;border-radius:8px;padding:6px 10px;font:700 11px Inter,system-ui,Arial;cursor:pointer}.table-pager button:disabled{opacity:.4;cursor:not-allowed}.table-pager span{font-size:11px;color:var(--muted)}
+@media(max-width:1250px){.layout{grid-template-columns:minmax(0,1fr) 280px}.hero-art{width:30%}}
+@media(max-width:980px){.side-nav{width:68px;padding:16px 8px}.brand{justify-content:center;padding:4px 0 18px}.brand-copy,.nav-label,.side-nav a .nav-text,.nav-bottom{display:none}.side-nav a{justify-content:center;padding:12px 7px}.side-nav a .nav-ico{font-size:19px}.app-content{margin-left:68px}.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr}.state-list{max-height:270px}#map{height:500px}}
+@media(max-width:650px){.side-nav{position:sticky;top:0;width:100%;height:58px;inset:auto;flex-direction:row;align-items:center;padding:6px 8px;overflow-x:auto;box-shadow:0 4px 14px #061a3530}.brand{border:0;margin:0;padding:0 8px 0 2px;flex:0 0 auto}.brand-mark{width:34px;height:34px}.side-nav nav{display:flex;gap:3px}.side-nav a{padding:9px 10px;flex:0 0 auto}.side-nav a .nav-ico{font-size:17px}.app-content{margin-left:0}.hero-inner{display:block}.hero-art{position:absolute;right:-5px;bottom:-5px;width:45%;min-width:145px;opacity:.55}.hero-title{max-width:75%;font-size:27px}.hero-sub{max-width:80%;font-size:11px}.hero-tags{max-width:70%}header{padding:23px 17px 25px;min-height:175px}.kpis{grid-template-columns:1fr 1fr;gap:8px}.card{padding:12px;min-height:100px}.value{font-size:24px}.insight-grid{grid-template-columns:1fr}.insight-grid .chart-panel:last-child{grid-column:auto}.chart-panel{min-height:280px}.chart-wrap{height:205px}.sidebar{display:flex}.panel{padding:13px}#map{height:430px}.filters input{min-width:100%;}.filters select{flex:1;min-width:130px}main{padding:14px 10px 30px}.notice{font-size:10px}.toolbar a,.toolbar button{font-size:10px;padding:8px 10px}}
 
-const GEO_BASE='https://raw.githubusercontent.com/Hari31416/india-geojson-assets/v1/';
-let geoManifest=null,indiaGeo=null,currentDistrictGeo=null,currentMapState=null;
-const norm=s=>String(s||'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]/g,'');
-const stateAliases={'nctofdelhi':'delhi','delhi':'nctofdelhi','odisha':'orissa','orissa':'odisha','andamanandnicobar':'andamanandnicobarislands','andamanandnicobarislands':'andamanandnicobar','dadraandnagarhavelianddamananddiu':'dadraandnagarhavelianddamananddiu'};
-function matchState(a,b){let x=norm(a),y=norm(b);return x===y||stateAliases[x]===y||stateAliases[y]===x}
-async function getGeoManifest(){if(geoManifest)return geoManifest;let r=await fetch(GEO_BASE+'manifest.json');if(!r.ok)throw Error('Could not load geographic manifest');geoManifest=await r.json();return geoManifest}
-async function loadGeoAsset(assetKey){let m=await getGeoManifest(),a=m.assets[assetKey];if(!a)throw Error('Boundary asset not found: '+assetKey);let r=await fetch(GEO_BASE+a.display.path);if(!r.ok)throw Error('Boundary download failed');let buf=await r.arrayBuffer();let stream=new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'));return JSON.parse(await new Response(stream).text())}
-function geoMetricRows(rows,metric){return rows.filter(x=>x[metric]!=null&&Number.isFinite(+x[metric]))}
-function mapColorbar(metric){return {title:metric==='GENDER_GAP_PP'?'pp':(['P_LIT','P_ILL'].includes(metric)?'People':'%'),tickfont:{color:'#b9cce5'}}}
-function mapTrace(geo,rows,metric){
- const byName=new Map(rows.map(x=>[norm(x.Name),x]));
- const matched=(geo.features||[]).map(f=>{const name=f.properties?.name;const row=byName.get(norm(name));return row?{name,row}:null}).filter(Boolean);
- return {type:'choropleth',geojson:geo,featureidkey:'properties.name',locationmode:'geojson-id',
- locations:matched.map(x=>x.name),z:matched.map(x=>+x.row[metric]),
- customdata:matched.map(x=>[x.row.Name,x.row.LITERACY_RATE_PCT,x.row.LITERACY_RATE_M_PCT,x.row.LITERACY_RATE_F_PCT,x.row.GENDER_GAP_PP,x.row.P_LIT,x.row.P_ILL]),
- colorscale:[[0,'#243d68'],[.25,'#276b9b'],[.5,'#16a6a0'],[.75,'#38d6b0'],[1,'#d4ff73']],
- marker:{line:{color:'#8beaff',width:.65}},colorbar:mapColorbar(metric),
- hovertemplate:'<b>%{location}</b><br>Selected value: %{z:,.2f}<br>Overall: %{customdata[1]:.2f}%<br>Male: %{customdata[2]:.2f}%<br>Female: %{customdata[3]:.2f}%<br>Gender gap: %{customdata[4]:.2f} pp<br>Literate: %{customdata[5]:,.0f}<br>Illiterate: %{customdata[6]:,.0f}<extra></extra>'}
+/* ── Liquid glass visual system ───────────────────────────────────── */
+:root{
+  --ink:#102746;--muted:#62758e;--line:rgba(255,255,255,.72);
+  --panel:rgba(255,255,255,.66);
+  --shadow:0 18px 48px rgba(31,67,112,.10),0 3px 10px rgba(31,67,112,.05);
 }
-function mapLayout(){return {paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{family:'DM Sans',color:'#b9cce5'},margin:{l:0,r:0,t:0,b:0},geo:{projection:{type:'mercator'},visible:false,bgcolor:'rgba(0,0,0,0)',fitbounds:'locations'},coloraxis:{colorscale:[[0,'#243d68'],[.25,'#276b9b'],[.5,'#16a6a0'],[.75,'#38d6b0'],[1,'#d4ff73']]}}}
-async function renderIndiaGeoMap(){let box=$('#indiaGeoMap');box.innerHTML='<div class="empty">Loading interactive India boundaries…</div>';try{indiaGeo=indiaGeo||await loadGeoAsset('india-states-reversed');drawIndiaGeoMap()}catch(e){box.innerHTML='<div class="empty">Map boundaries could not be loaded. Please check your internet connection and reload.</div>';$('#indiaMapLegend').textContent='Boundary source: India GeoJSON assets (community-maintained). '+e.message}}
-function drawIndiaGeoMap(){if(!indiaGeo)return;let metric=$('#mapMetric').value,rows=geoMetricRows(census.census2011.state.filter(x=>x.TRU==='Total'),metric),tr=mapTrace(indiaGeo,rows,metric);Plotly.react('indiaGeoMap',[tr],mapLayout(),{responsive:true,displayModeBar:false}).then(()=>{let el=$('#indiaGeoMap');el.removeAllListeners?.('plotly_click');el.on('plotly_click',ev=>{let n=ev.points?.[0]?.location;if(n)openDistrictGeo(n)})});$('#indiaMapLegend').textContent=`Census 2011 • ${($('#mapMetric').selectedOptions[0]?.text||metric)} • ${tr.locations.length} of ${(indiaGeo.features||[]).length} state boundary names matched. Tap a coloured state to drill down. Boundary layer is community-maintained; historical district values are joined by name.`}
-let districtRequestId=0;
-async function openDistrictGeo(stateName){
- const requestId=++districtRequestId;
- currentMapState=stateName;
- const panel=$('#districtGeoPanel'),mapEl=$('#districtGeoMap');
- panel.style.display='block';
- $('#districtGeoTitle').textContent=stateName+' — district literacy';
- if(mapEl)Plotly.purge(mapEl);
- mapEl.innerHTML='<div class="empty">Loading district boundaries…</div>';
- $('#districtMapLegend').textContent='Fetching boundary data…';
- panel.scrollIntoView({behavior:'smooth',block:'start'});
- try{
-  let key=String(stateName).toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-districts';
-  if(stateName==='Andaman and Nicobar Islands')key='andaman-nicobar-districts';
-  if(stateName==='Dadra and Nagar Haveli and Daman and Diu')key='dadra-daman-diu-districts';
-  const geo=await loadGeoAsset(key);
-  if(requestId!==districtRequestId)return;
-  currentDistrictGeo=geo;
-  await drawDistrictGeoMap(stateName,geo,requestId);
- }catch(e){
-  if(requestId!==districtRequestId)return;
-  if(mapEl)Plotly.purge(mapEl);
-  mapEl.innerHTML='<div class="empty">District boundary file could not be displayed: '+String(e.message||e)+'</div>';
-  $('#districtMapLegend').textContent='Please try selecting the state again.';
- }
+html{scroll-padding-top:82px}
+body{
+  background:
+    radial-gradient(ellipse at 12% 8%,rgba(91,184,239,.22),transparent 34%),
+    radial-gradient(ellipse at 88% 18%,rgba(129,111,231,.16),transparent 31%),
+    radial-gradient(ellipse at 72% 78%,rgba(73,207,177,.13),transparent 34%),
+    linear-gradient(145deg,#eaf3fc 0%,#f4f7fd 48%,#e9f1fb 100%);
+  background-attachment:fixed;
 }
-async function drawDistrictGeoMap(stateName,geo,requestId){
- const features=geo.features||[];
- const base=census.census2011.district.filter(x=>x.TRU==='Total'&&matchState(x.StateName,stateName));
- const byName=new Map(base.map(x=>[norm(x.Name),x]));
- const joined=features.map(f=>{
-  const props=f.properties||{},nm=props.name||props.dtname||props.NAME;
-  const d=byName.get(norm(nm));
-  return d?{Name:nm,LITERACY_RATE_PCT:d.LITERACY_RATE_PCT,LITERACY_RATE_M_PCT:d.LITERACY_RATE_M_PCT,LITERACY_RATE_F_PCT:d.LITERACY_RATE_F_PCT,GENDER_GAP_PP:d.GENDER_GAP_PP,P_LIT:d.P_LIT,P_ILL:d.P_ILL}:null;
- }).filter(x=>x&&x.LITERACY_RATE_PCT!=null);
- if(requestId!==districtRequestId)return;
- if(!joined.length){
-  $('#districtGeoMap').innerHTML='<div class="empty">No exact district-name matches found between the boundary vintage and Census 2011. Use the district explorer table for verified Census figures.</div>';
-  $('#districtMapLegend').textContent='0 district names matched.';
-  return;
- }
- const metric=$('#mapMetric').value,tr=mapTrace(geo,joined,metric),mapEl=$('#districtGeoMap');
- Plotly.purge(mapEl);
- mapEl.innerHTML='';
- await Plotly.newPlot(mapEl,[tr],mapLayout(),{responsive:true,displayModeBar:false});
- if(requestId!==districtRequestId)return;
- $('#districtMapLegend').textContent=`${joined.length} of ${features.length} boundary names matched to Census 2011 district records. Newer/renamed districts without a direct 2011 match are not coloured. Values remain Census 2011.`;
+.app-shell{isolation:isolate}
+.side-nav{
+  background:linear-gradient(155deg,rgba(7,29,59,.91),rgba(11,55,91,.86));
+  border-right:1px solid rgba(255,255,255,.16);
+  box-shadow:12px 0 42px rgba(12,40,75,.13);
+  backdrop-filter:blur(24px) saturate(145%);
+  -webkit-backdrop-filter:blur(24px) saturate(145%);
 }
-function renderCensus(){let n=census.census2011.validation,rows=census.census2011.national_residence;$('#censusKpis').innerHTML=[['Population','1,210,854,977','All ages • Census 2011'],['Population aged 7+','1,046,339,724','Literacy denominator'],['Literate population','763,638,812','Census 2011'],['Literacy rate','72.98%','Age 7+ • Census 2011']].map(x=>`<div class="card kpi"><small>${x[0]}</small><div class="value">${x[1]}</div><div class="sub">${x[2]}</div></div>`).join('');plot('resChart',[{type:'bar',name:'Persons',x:rows.map(x=>x.TRU),y:rows.map(x=>x.LITERACY_RATE_PCT),marker:{color:'#4b7cff'}},{type:'bar',name:'Male',x:rows.map(x=>x.TRU),y:rows.map(x=>x.LITERACY_RATE_M_PCT),marker:{color:'#20e0c0'}},{type:'bar',name:'Female',x:rows.map(x=>x.TRU),y:rows.map(x=>x.LITERACY_RATE_F_PCT),marker:{color:'#ffad5c'}}],{barmode:'group',yaxis:{range:[0,100],title:'Literacy (%)'},margin:{l:45,r:10,t:10,b:40},legend:{orientation:'h',y:1.15}});let total=rows.find(x=>x.TRU==='Total');plot('litChart',[{type:'bar',name:'Literate',x:rows.map(x=>x.TRU),y:rows.map(x=>x.P_LIT/1e7),marker:{color:'#20e0c0'}},{type:'bar',name:'Illiterate',x:rows.map(x=>x.TRU),y:rows.map(x=>x.P_ILL/1e7),marker:{color:'#ffad5c'}}],{barmode:'stack',yaxis:{title:'People (crore)'},margin:{l:55,r:10,t:10,b:40},legend:{orientation:'h',y:1.15}});renderRanks();renderIndiaGeoMap();$('#mapMetric').addEventListener('change',()=>{drawIndiaGeoMap();if(currentMapState)drawDistrictGeoMap(currentMapState)});$('#backToIndia').addEventListener('click',()=>{districtRequestId++;Plotly.purge($('#districtGeoMap'));$('#districtGeoMap').innerHTML='';$('#districtGeoPanel').style.display='none';currentMapState=null;currentDistrictGeo=null})}
-function renderTileMap(){let rows=census.census2011.state.filter(x=>x.TRU==="Total"&&x.LITERACY_RATE_PCT!=null).sort((a,b)=>a.Name.localeCompare(b.Name));let color=v=>v<65?"#435a82":v<75?"#2879a8":v<85?"#176d79":"#12a88c";$('#stateTileMap').innerHTML=rows.map(x=>`<div class="tile" title="${x.Name}: ${pct(x.LITERACY_RATE_PCT)}" style="background:${color(x.LITERACY_RATE_PCT)}" onclick="document.getElementById('stateResidence').value='Total';document.getElementById('rankMetric').value='LITERACY_RATE_PCT';renderRanks()">${x.Name}<small>${Number(x.LITERACY_RATE_PCT).toFixed(1)}%</small></div>`).join('')}
-function renderRanks(){let res=$('#stateResidence').value,metric=$('#rankMetric').value,rows=census.census2011.state.filter(x=>x.TRU===res&&x[metric]!=null).sort((a,b)=>b[metric]-a[metric]),label=metric==='GENDER_GAP_PP'?'Gender gap (percentage points)':(['P_LIT','P_ILL','TOT_P'].includes(metric)?'Population (people)':'Literacy (%)');function chart(id,a){plot(id,[{type:'bar',orientation:'h',y:a.map(x=>x.Name).reverse(),x:a.map(x=>x[metric]).reverse(),marker:{color:'#4b7cff'},hovertemplate:'%{y}: %{x:,.2f}<extra></extra>'}],{xaxis:{title:label},yaxis:{automargin:true},margin:{l:145,r:15,t:8,b:45}})}chart('topStates',rows.slice(0,10));chart('bottomStates',rows.slice(-10).reverse())}
-function renderDistricts(){let states=[...new Set(census.census2011.district.map(x=>x.StateName).filter(Boolean))].sort();$('#districtState').innerHTML='<option value="">All states/UTs</option>'+states.map(s=>`<option>${s}</option>`).join('');let draw=()=>{let s=$('#districtState').value,r=$('#districtResidence').value,q=$('#districtSearch').value.toLowerCase(),rows=census.census2011.district.filter(x=>x.TRU===r&&(!s||x.StateName===s)&&x.Name.toLowerCase().includes(q)).sort((a,b)=>(b.LITERACY_RATE_PCT??-1)-(a.LITERACY_RATE_PCT??-1));$('#districtCount').textContent=`Showing ${rows.length.toLocaleString('en-IN')} district records • sorted by literacy rate`;$('#districtTable tbody').innerHTML=rows.map(x=>`<tr><td>${x.Name}</td><td>${x.StateName||'—'}</td><td>${fmt(x.TOT_P)}</td><td>${fmt(x.P_LIT)}</td><td>${pct(x.LITERACY_RATE_PCT)}</td><td>${pct(x.LITERACY_RATE_M_PCT)}</td><td>${pct(x.LITERACY_RATE_F_PCT)}</td><td>${x.GENDER_GAP_PP==null?'—':x.GENDER_GAP_PP.toFixed(2)}</td></tr>`).join('')};['districtState','districtResidence','districtSearch'].forEach(id=>$('#'+id).addEventListener('input',draw));draw()}
-function renderAge(){let a=census.census2011.c13_age_bands;plot('ageChart',[{type:'bar',x:a.map(x=>x.age_group),y:a.map(x=>x.literacy_rate),marker:{color:'#20e0c0'},text:a.map(x=>x.literacy_rate.toFixed(1)+'%'),textposition:'outside'}],{yaxis:{range:[0,100],title:'Literacy (%)'},margin:{l:45,r:15,t:15,b:45}});let e=census.census2011.education;plot('eduChart',[{type:'bar',orientation:'h',y:e.map(x=>x.level).reverse(),x:e.map(x=>x.count/1e7).reverse(),marker:{color:'#4b7cff'},hovertemplate:'%{y}: %{x:.2f} crore<extra></extra>'}],{xaxis:{title:'People (crore)'},yaxis:{automargin:true},margin:{l:175,r:10,t:10,b:45}});$('#ageTable tbody').innerHTML=a.map(x=>`<tr><td>${x.age_group}</td><td>${fmt(x.population)}</td><td>${fmt(x.literate)}</td><td>${fmt(x.illiterate)}</td><td>${pct(x.literacy_rate)}</td></tr>`).join('')}
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab,.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#'+b.dataset.view).classList.add('active');setTimeout(()=>window.dispatchEvent(new Event('resize')),80)}));
-['plfsResidence','plfsGender','plfsSearch'].forEach(id=>$('#'+id).addEventListener('input',renderPLFS));['stateResidence','rankMetric'].forEach(id=>$('#'+id).addEventListener('input',renderRanks));
-init().catch(e=>{console.error(e);document.body.insertAdjacentHTML('afterbegin','<div class="notice">Dashboard data could not be loaded. Check that the data folder and files were uploaded to the repository.</div>')});
+.side-nav a{transition:background .28s ease,transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease}
+.side-nav a:hover{transform:translateX(3px)}
+header{
+  background:linear-gradient(115deg,rgba(5,25,53,.96),rgba(14,66,111,.91) 52%,rgba(7,126,153,.88));
+  border-bottom:1px solid rgba(255,255,255,.24);
+}
+header:after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;
+  background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.13) 48%,transparent 68%);
+  transform:translateX(-100%);animation:heroSheen 12s ease-in-out 2s infinite;
+}
+@keyframes heroSheen{0%,72%,100%{transform:translateX(-100%)}88%{transform:translateX(100%)}}
+main{position:relative}
+.notice{
+  background:rgba(255,250,235,.78);border:1px solid rgba(235,190,95,.48);
+  box-shadow:0 12px 30px rgba(137,103,37,.07);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+.toolbar a,.toolbar button{
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 5px 15px rgba(37,91,145,.07);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease;
+}
+.toolbar a:hover,.toolbar button:hover{transform:translateY(-3px);box-shadow:0 11px 22px rgba(37,91,145,.13)}
+.card,.panel{
+  border:1px solid rgba(255,255,255,.82);
+  background:rgba(255,255,255,.64);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(22px) saturate(150%);
+  -webkit-backdrop-filter:blur(22px) saturate(150%);
+  transition:transform .42s cubic-bezier(.2,.8,.2,1),box-shadow .38s ease,border-color .3s ease;
+}
+.panel{position:relative;overflow:hidden}
+.panel:before{
+  content:"";position:absolute;inset:0 0 auto;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.98),transparent);
+}
+.panel:hover{
+  transform:translateY(-3px);
+  box-shadow:0 23px 55px rgba(31,67,112,.13),0 5px 14px rgba(31,67,112,.06);
+  border-color:rgba(255,255,255,.98);
+}
+.card{
+  border:1px solid rgba(255,255,255,.34);
+  box-shadow:0 15px 35px rgba(18,55,105,.13),inset 0 1px 0 rgba(255,255,255,.22);
+}
+.card:nth-child(1){background:linear-gradient(135deg,rgba(16,126,205,.91),rgba(21,66,135,.88))}
+.card:nth-child(2){background:linear-gradient(135deg,rgba(125,82,213,.91),rgba(76,45,151,.88))}
+.card:nth-child(3){background:linear-gradient(135deg,rgba(26,177,124,.91),rgba(8,116,83,.88))}
+.card:nth-child(4){background:linear-gradient(135deg,rgba(239,171,48,.94),rgba(220,94,34,.91))}
+.card:after{width:170px;height:170px;right:-48px;top:-68px;background:radial-gradient(circle,rgba(255,255,255,.25),rgba(255,255,255,.025) 65%,transparent 70%);border:1px solid rgba(255,255,255,.16)}
+.value{text-shadow:0 2px 12px rgba(0,28,65,.12)}
+.chart-pill,.chip,.tag{
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 3px 10px rgba(36,83,130,.05);
+}
+.chart-wrap canvas{filter:drop-shadow(0 5px 8px rgba(26,65,111,.04))}
+#map{border:1px solid rgba(255,255,255,.9);box-shadow:inset 0 1px 8px rgba(30,66,108,.08)}
+.tablewrap{border:1px solid rgba(255,255,255,.95);box-shadow:0 8px 24px rgba(31,67,112,.06)}
+table{background:rgba(255,255,255,.78)}
+th{background:rgba(230,241,251,.94);backdrop-filter:blur(12px)}
+tbody tr{transition:background .2s ease}
+tbody tr:hover{background:rgba(216,237,252,.68)}
+.filters input,.filters select,.maptools select{
+  background:rgba(255,255,255,.76);border:1px solid rgba(190,211,233,.75);
+  box-shadow:inset 0 1px 2px rgba(35,70,110,.035),0 4px 12px rgba(35,70,110,.035);
+}
+.filters input:focus,.filters select:focus,.maptools select:focus{
+  outline:3px solid rgba(83,169,224,.18);border-color:#69acd9;
+}
+.table-pager button{transition:transform .25s ease,box-shadow .25s ease}
+.table-pager button:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 5px 12px rgba(35,75,120,.1)}
+.source-card{background:rgba(255,255,255,.58)}
+/* Reveal uses opacity/transform only; no layout animation. */
+.motion-ready .reveal-item{opacity:0;transform:translateY(16px) scale(.992);transition:opacity .65s ease,transform .75s cubic-bezier(.2,.8,.2,1)}
+.motion-ready .reveal-item.is-visible{opacity:1;transform:translateY(0) scale(1)}
+@media(max-width:650px){
+  .side-nav{background:rgba(7,29,59,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+  .panel:hover{transform:none}
+  .card{box-shadow:0 10px 24px rgba(18,55,105,.12)}
+  header:after{animation:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .motion-ready .reveal-item{opacity:1;transform:none}
+}
+
+</style></head>
+<body>
+<div class="app-shell">
+<nav class="side-nav" aria-label="Dashboard navigation">
+  <div class="brand"><div class="brand-mark">⚡</div><div class="brand-copy"><strong>Aniketverse</strong><small>Energy intelligence</small></div></div>
+  <div class="nav-label">Workspace</div>
+  <nav>
+    <a class="active" href="#overview"><span class="nav-ico">⌂</span><span class="nav-text">Overview</span></a>
+    <a href="#analytics"><span class="nav-ico">▥</span><span class="nav-text">Analytics</span></a>
+    <a href="#yearTrendChart"><span class="nav-ico">↗</span><span class="nav-text">Yearly trend</span></a>
+    <a href="#mapPanel"><span class="nav-ico">⌖</span><span class="nav-text">Plant map</span></a>
+    <a href="#inventory"><span class="nav-ico">▤</span><span class="nav-text">Stations</span></a>
+    <a href="#statePanel"><span class="nav-ico">▦</span><span class="nav-text">State analysis</span></a>
+    <a href="#fuelPanel"><span class="nav-ico">◈</span><span class="nav-text">Fuel analysis</span></a>
+    <a href="#dataNotes"><span class="nav-ico">ⓘ</span><span class="nav-text">Data & updates</span></a>
+  </nav>
+  <div class="nav-bottom">INDIA POWER GRID<br>Historical baseline + CEA/NPP feed</div>
+</nav>
+<div class="app-content">
+<header>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-kicker">India · Electricity infrastructure</div>
+      <h1 class="hero-title">India Power Plants <span>Dashboard</span></h1>
+      <p class="hero-sub">Generating stations · Capacity · Fuel mix · State-wise inventory</p>
+      <div class="hero-tags"><span>LIVE MAP EXPERIENCE</span><span>FULL INVENTORY</span><span>DATA EXPLORER</span></div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 420 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 108L60 78L105 96L160 58L205 92L260 64L315 93L365 48L420 80V130H0Z" fill="#45B7A0" opacity=".25"/>
+        <path d="M0 116L85 100L150 110L220 88L290 109L360 88L420 101V130H0Z" fill="#8FD3C5" opacity=".22"/>
+        <g stroke="#E8F8FF" stroke-width="2.2" stroke-linecap="round"><path d="M80 105V28M80 28L56 15M80 28L104 15M80 28L80 0"/><path d="M80 28L74 52L86 52Z" fill="#E8F8FF"/><path d="M260 106V17M260 17L231 3M260 17L289 3M260 17V-7"/><path d="M260 17L253 43L267 43Z" fill="#E8F8FF"/><path d="M355 108V43M355 43L335 32M355 43L375 32M355 43V22"/></g>
+        <g fill="#F5C451" opacity=".95"><path d="M0 82L26 82L37 64L49 82L62 82V108H0Z"/><path d="M18 63L27 42L36 63Z"/></g>
+        <g stroke="#C9F3FF" stroke-width="1.5" fill="#0B6B8D" opacity=".95"><path d="M120 105L142 78L164 105Z"/><path d="M132 105L154 78L176 105Z"/><path d="M144 105L166 78L188 105Z"/></g>
+        <path d="M205 110L218 88L231 110Z" fill="#F7B93C"/><path d="M218 88V64" stroke="#F7B93C" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+</header>
+<main>
+<div class="notice"><b>Scope:</b> Electricity-generating stations from the historical WRI GPPD baseline plus the CEA/NPP daily station-wise (DGR-2) update feed. Industrial, captive, co-generation and private-sector stations are retained where they appear in the source records; no industry-name or sector filter is applied to the CEA feed. The CEA feed is limited to stations published in DGR-2 and is not a complete register of every captive generator. Its capacity field uses CEA monitored capacity (MW), which may differ from installed capacity. The WRI GPPD v1.3.0 baseline is historical and no longer maintained, so this is a combined reference inventory—not a certified current register. Cross-check current plant layers against the official ISRO–NITI Energy Map and CEA generator registry. Rooftop/distributed solar is excluded.</div>
+<div class="toolbar">
+<a href="https://vedas.sac.gov.in/energymap/view/powergis.jsp" target="_blank" rel="noopener">Open live ISRO–NITI Energy Map ↗</a>
+<a class="alt" href="https://www.listbase.org/en/environment/in-power-plants/" target="_blank" rel="noopener">Open full source dataset ↗</a>
+<a class="alt" href="https://github.com/wri/global-power-plant-database" target="_blank" rel="noopener">WRI methodology & licence ↗</a>
+<a class="alt" href="data/update_log.json" target="_blank" rel="noopener">View automatic update log ↗</a>
+<a class="alt" href="https://egen.cea.gov.in/genreport.aspx" target="_blank" rel="noopener">CEA generator registry ↗</a>
+<button id="downloadCsv" class="alt">Download loaded inventory CSV</button>
+</div>
+<section class="kpis" id="overview">
+<div class="card"><div class="label">Plant records</div><div class="value" id="total">Loading…</div><div class="sub">Source inventory records</div></div>
+<div class="card"><div class="label">Mapped plants</div><div class="value" id="mapped">—</div><div class="sub">Records with usable coordinates</div></div>
+<div class="card"><div class="label">Fuel categories</div><div class="value" id="fuels">—</div><div class="sub">Primary fuel types in dataset</div></div>
+<div class="card"><div class="label">States / UTs mapped</div><div class="value" id="states">—</div><div class="sub">Political boundary match</div></div>
+</section>
+<section class="insight-grid" id="analytics">
+  <article class="panel chart-panel">
+    <div class="chart-head"><div><div class="section-kicker">Fuel composition</div><h2>Installed capacity by fuel</h2><p class="hint">Sum of listed capacity values in the loaded inventory.</p></div><span class="chart-pill">MW</span></div>
+    <div class="chart-wrap"><canvas id="fuelCapacityChart" aria-label="Installed capacity by fuel type"></canvas></div>
+    <p class="chart-note">Only records with a numeric capacity contribute; this is listed capacity, not actual generation.</p>
+  </article>
+  <article class="panel chart-panel">
+    <div class="chart-head"><div><div class="section-kicker">Geographic leaders</div><h2>Top states by station count</h2><p class="hint">Ranked by geolocated inventory records.</p></div><span class="chart-pill">TOP 10</span></div>
+    <div class="chart-wrap"><canvas id="stateCountChart" aria-label="Top states by station count"></canvas></div>
+    <p class="chart-note">State assignment is based on coordinates and the displayed boundary dataset.</p>
+  </article>
+  <article class="panel chart-panel">
+    <div class="chart-head"><div><div class="section-kicker">Station profile</div><h2>Stations by size</h2><p class="hint">Capacity bands for records with known MW values.</p></div><span class="chart-pill">PLANTS</span></div>
+    <div class="chart-wrap"><canvas id="stationSizeChart" aria-label="Stations by installed capacity size"></canvas></div>
+    <p class="chart-note">Bands are descriptive categories; records without capacity are excluded from this chart.</p>
+  </article>
+  <article class="panel chart-panel">
+    <div class="chart-head"><div><div class="section-kicker">Historical generation</div><h2>Year-wise electricity generation</h2><p class="hint">Annual generation reported by the historical WRI inventory.</p></div><span class="chart-pill">GWh</span></div>
+    <div class="chart-wrap"><canvas id="yearTrendChart" aria-label="Annual electricity generation trend from 2013 to 2019"></canvas></div>
+    <p class="chart-note" id="trendStatus">Historical generation loads automatically as this chart approaches the screen. Source: WRI Global Power Plant Database v1.3.0; 2013–2019 coverage varies and is not India's complete national generation series.</p>
+  </article>
+</section>
+<div class="layout">
+<div>
+<section class="panel" id="mapPanel">
+<h2>Power plant locations across India</h2><p class="hint">Political state boundaries with plant markers. Select a marker for plant name, fuel, capacity and owner. Use fuel and status filters to declutter.</p>
+<div class="maptools">
+<select id="mapFuel"><option value="">All fuels</option></select>
+<select id="mapState"><option value="">All states / UTs</option></select>
+<select id="mapStatus"><option value="all">All records</option><option value="mapped">Mapped only</option><option value="unmapped">No coordinates</option></select>
+</div>
+<div id="map"></div>
+<div class="maplegend" id="legend"></div>
+<div id="loadError"></div>
+<div class="status" id="loadStatus">Loading the station inventory. Map boundaries and historical generation will load when needed.</div>
+</section>
+<section class="panel" id="inventory" style="margin-top:13px">
+<h2>Complete plant inventory</h2><p class="hint">Search and filter all available electricity-generation station records, including industrial, captive and co-generation facilities. Click column headings to sort. State is assigned from coordinates where available.</p>
+<div class="filters"><input id="search" placeholder="Search plant name, owner, fuel, state…"><select id="fuelFilter"><option value="">All fuel types</option></select><select id="stateFilter"><option value="">All states / UTs</option></select><select id="coordFilter"><option value="">All coordinate status</option><option value="yes">Coordinates available</option><option value="no">Coordinates missing</option></select></div>
+<div class="tablewrap"><table><thead><tr>
+<th data-k="name">Plant name</th><th data-k="state">State / UT</th><th data-k="fuel">Primary fuel</th><th data-k="capacity" class="num">Capacity MW</th><th data-k="owner">Owner</th><th data-k="year" class="num">Commissioning year</th><th data-k="lat" class="num">Latitude</th><th data-k="lon" class="num">Longitude</th>
+</tr></thead><tbody id="rows"></tbody></table></div><div class="status" id="tableStatus"></div>
+</section>
+</div>
+<aside class="sidebar">
+<section class="panel" id="statePanel"><h2>State-wise plant count</h2><p class="hint">Descending order · Counted from geolocated records in this inventory.</p><div id="stateCounts" class="state-list">State-wise analysis will load when needed…</div></section>
+<section class="panel" id="fuelPanel"><h2>Fuel-wise inventory</h2><p class="hint">Primary fuel classification.</p><div id="fuelCounts" class="fuel-list"></div></section>
+<section class="panel" id="dataNotes"><h2>Data notes</h2><div class="source">
+<ul style="padding-left:17px;margin:7px 0">
+<li>WRI GPPD v1.3.0 is historical and no longer maintained.</li>
+<li>Generation history in the source is mainly 2013–2019; it is not FY 2024–25 generation.</li>
+<li>Missing coordinates prevent state assignment and map display.</li>
+<li>Industrial, captive and co-generation records are included where present in the source data; they are not screened out.</li>
+<li>Renewable projects are represented as individual records where present; the live VEDAS map also provides district-level renewable counts.</li>
+</ul>
+<b>Official cross-check:</b> ISRO–NITI Energy Map provides separate conventional and renewable plant layers; CEA's National Data Registry lists generating units by project, unit, fuel, state and status. These official sources are linked below for reconciliation. CEA DGR-2 additions are retained regardless of sector or industry; coverage is limited to stations present in the published report.
+</div></section>
+</aside>
+</div>
+<section class="panel source-card" id="sources" style="margin-top:13px"><h2>Sources</h2><div class="source">
+1. <a href="https://www.listbase.org/en/environment/in-power-plants/" target="_blank" rel="noopener">ListBase India Power Plants download page</a> — 1,589 records advertised; data source WRI GPPD v1.3.0; CSV served from its CDN.<br>
+2. <a href="https://github.com/wri/global-power-plant-database" target="_blank" rel="noopener">WRI Global Power Plant Database</a> — fields include plant name, fuel, capacity, coordinates, owner, source and historical generation; WRI says the database is not currently maintained.<br>
+3. <a href="https://vedas.sac.gov.in/energymap/view/powergis.jsp" target="_blank" rel="noopener">ISRO–NITI Aayog Geospatial Energy Map of India</a> — conventional plant layers, renewable project layers and state-wise search.<br>
+4. <a href="https://egen.cea.gov.in/genreport.aspx" target="_blank" rel="noopener">CEA National Data Registry for Generating Units</a> — project/unit/fuel/state/status register; includes captive and industrial generating units.<br>
+5. <a href="https://cea.nic.in/reports/external/daily-generation?lang=en" target="_blank" rel="noopener">CEA Generation Reports</a> — station-wise generation reports.<br>
+</div></section>
+</main>
+</div></div>
+<script>
+const CSV_URL="https://cdn.en.listbase.org/environment/in-power-plants_EN.csv";
+const GENERATION_URLS=[
+  "https://raw.githubusercontent.com/wri/global-power-plant-database/master/source_databases_csv/database_IND.csv",
+  "https://cdn.jsdelivr.net/gh/wri/global-power-plant-database@master/source_databases_csv/database_IND.csv"
+];
+const CEA_CSV_URL="data/cea_additions.csv";
+const GEO_URL="https://raw.githubusercontent.com/geohacker/india/master/state/india_state.geojson";
+const PAPA_URL="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js";
+const CHART_URL="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js";
+const LEAFLET_JS_URL="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+const LEAFLET_CSS_URL="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+const colors={Coal:"#4b5563",Gas:"#e08b28",Hydro:"#2476d2",Nuclear:"#7b4cc2",Solar:"#e0ad22",Wind:"#1b9b79",Biomass:"#a36a38",Oil:"#bd4b4b",Waste:"#8c6cae",Geothermal:"#cf6a9b",Other:"#7b8798"};
+let plants=[],geo=null,geoFeatures=[],markers=[],map=null,layer=null,sortKey="name",sortDir=1,charts={};
+let papaPromise=null,chartPromise=null,leafletPromise=null,geoPromise=null,generationPromise=null;
+let stateDataReady=false,generationDataReady=false,generationSummary=null,tablePage=1;
+const TABLE_PAGE_SIZE=100;
+const norm=s=>String(s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
+const val=(r,keys)=>{for(const k of keys){if(r[k]!=null&&String(r[k]).trim()!=="")return r[k]}const target=keys.map(norm);for(const k of Object.keys(r)){if(target.includes(norm(k))&&String(r[k]||"").trim()!=="")return r[k]}return ""};
+const num=v=>{let n=parseFloat(String(v??"").replace(/,/g,""));return Number.isFinite(n)?n:null};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=n=>n==null?"—":Number(n).toLocaleString("en-IN",{maximumFractionDigits:2});
+function loadScript(src){return new Promise((resolve,reject)=>{if([...document.scripts].some(x=>x.src===src&&x.dataset.loaded==="true")){resolve();return}let existing=[...document.scripts].find(x=>x.src===src);if(existing){existing.addEventListener("load",()=>resolve(),{once:true});existing.addEventListener("error",()=>reject(new Error("Could not load "+src)),{once:true});return}const s=document.createElement("script");s.src=src;s.async=true;s.onload=()=>{s.dataset.loaded="true";resolve()};s.onerror=()=>reject(new Error("Could not load external library: "+src));document.head.appendChild(s)})}
+function loadCss(href){return new Promise((resolve,reject)=>{if([...document.styleSheets].some(x=>x.href===href)){resolve();return}const l=document.createElement("link");l.rel="stylesheet";l.href=href;l.onload=resolve;l.onerror=()=>reject(new Error("Could not load map styles"));document.head.appendChild(l)})}
+function ensurePapa(){if(!papaPromise)papaPromise=loadScript(PAPA_URL).then(()=>{if(!window.Papa)throw new Error("CSV parser did not initialise.");return window.Papa});return papaPromise}
+function ensureCharts(){if(!chartPromise)chartPromise=loadScript(CHART_URL).then(()=>{if(!window.Chart)throw new Error("Chart library did not initialise.");renderBaseCharts();if(stateDataReady)renderStateChart();if(generationDataReady)renderTrendChart();return window.Chart});return chartPromise}
+function ensureLeaflet(){if(!leafletPromise)leafletPromise=Promise.all([loadCss(LEAFLET_CSS_URL),loadScript(LEAFLET_JS_URL)]).then(()=>{if(!window.L)throw new Error("Map library did not initialise.");return window.L});return leafletPromise}
+function fuelGroup(f){let x=String(f||"Other").toLowerCase();if(x.includes("coal")||x.includes("lignite"))return "Coal";if(x.includes("gas"))return "Gas";if(x.includes("hydro"))return "Hydro";if(x.includes("nuclear"))return "Nuclear";if(x.includes("solar"))return "Solar";if(x.includes("wind"))return "Wind";if(x.includes("biomass")||x.includes("bagasse"))return "Biomass";if(x.includes("oil")||x.includes("diesel"))return "Oil";if(x.includes("waste"))return "Waste";return "Other"}
+function stateName(feature){let p=feature.properties||{};return p.st_nm||p.NAME_1||p.name_1||p.NAME_0||p.state||p.NAME||p.State||"Unknown"}
+function getBounds(coords,b=[Infinity,Infinity,-Infinity,-Infinity]){if(!Array.isArray(coords))return b;if(typeof coords[0]==="number"&&typeof coords[1]==="number"){b[0]=Math.min(b[0],coords[0]);b[1]=Math.min(b[1],coords[1]);b[2]=Math.max(b[2],coords[0]);b[3]=Math.max(b[3],coords[1]);return b}for(const c of coords)getBounds(c,b);return b}
+function inRing(x,y,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];const crosses=((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/((yj-yi)||1e-12)+xi);if(crosses)inside=!inside}return inside}
+function inPolygon(x,y,rings){if(!rings?.length||!inRing(x,y,rings[0]))return false;for(let i=1;i<rings.length;i++)if(inRing(x,y,rings[i]))return false;return true}
+function inGeometry(x,y,g){if(!g)return false;if(g.type==="Polygon")return inPolygon(x,y,g.coordinates);if(g.type==="MultiPolygon")return g.coordinates.some(poly=>inPolygon(x,y,poly));return false}
+async function ensureGeo(){if(!geoPromise)geoPromise=(async()=>{const r=await fetch(GEO_URL,{cache:"force-cache"});if(!r.ok)throw new Error("State boundary download failed (HTTP "+r.status+").");geo=await r.json();geoFeatures=(geo.features||[]).map(feature=>({feature,name:stateName(feature),bounds:getBounds(feature.geometry?.coordinates||[])}));return geo})();return geoPromise}
+async function ensureStateData(){if(stateDataReady)return;if(window.__stateLoadPromise)return window.__stateLoadPromise;window.__stateLoadPromise=(async()=>{const status=document.getElementById("stateCounts");if(status)status.textContent="Loading state boundaries and assigning plant locations…";try{await ensureGeo();for(const p of plants){if(p.lat==null||p.lon==null)continue;for(const f of geoFeatures){const b=f.bounds;if(p.lon<b[0]||p.lon>b[2]||p.lat<b[1]||p.lat>b[3])continue;if(inGeometry(p.lon,p.lat,f.feature.geometry)){p.state=f.name;break}}}stateDataReady=true;document.getElementById("states").textContent=new Set(plants.filter(p=>p.state&&p.state!=="Unassigned").map(p=>p.state)).size.toLocaleString("en-IN");populateFilters();sidePanels();renderTable();if(window.Chart&&document.getElementById("stateCountChart"))renderStateChart();}catch(e){if(status)status.textContent="State boundaries unavailable. Other dashboard data remains usable.";console.warn("State assignment:",e);throw e}})();return window.__stateLoadPromise}
+function popup(p){return `<b>${esc(p.name)}</b><br>${esc(p.state)}<br><span>${esc(p.rawFuel||p.fuel)}</span><br>Capacity: ${fmt(p.capacity)} MW<br>Owner: ${esc(p.owner||"Not listed")}<br>Commissioned: ${esc(p.year||"Not listed")}<br><small>${esc(p.source||"WRI GPPD v1.3.0")}</small>`}
+async function initMap(){if(map)return;const status=document.getElementById("loadStatus");try{status.textContent="Preparing interactive map…";await Promise.all([ensureLeaflet(),ensureStateData()]);map=L.map("map").setView([22.8,79.2],4.6);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap contributors",updateWhenIdle:true,keepBuffer:2}).addTo(map);const counts={};plants.forEach(p=>{if(p.state&&p.state!=="Unassigned")counts[p.state]=(counts[p.state]||0)+1});const max=Math.max(1,...Object.values(counts));const shade=n=>{const t=n/max;return t>.75?"#0879c9":t>.5?"#13a6b5":t>.25?"#54c88a":t>0?"#b8df63":"#e6edf4"};layer=L.geoJSON(geo,{style:feature=>{const n=counts[stateName(feature)]||0;return {color:"#ffffff",weight:1.3,fillColor:shade(n),fillOpacity:.78}},onEachFeature:(feature,l)=>{const n=counts[stateName(feature)]||0;l.bindTooltip(`${esc(stateName(feature))}: ${n.toLocaleString("en-IN")} listed stations`)}}).addTo(map);drawMarkers();map.fitBounds(layer.getBounds(),{padding:[10,10]});setTimeout(()=>map.invalidateSize(),150)}catch(e){document.getElementById("loadError").style.display="block";document.getElementById("loadError").textContent="Map could not be loaded: "+e.message}}
+function drawMarkers(){if(!map)return;markers.forEach(m=>map.removeLayer(m));markers=[];let f=document.getElementById("mapFuel").value,s=document.getElementById("mapState").value,st=document.getElementById("mapStatus").value;plants.forEach(p=>{if(st==="unmapped"||p.lat==null||p.lon==null)return;if(f&&p.fuel!==f)return;if(s&&p.state!==s)return;let color=colors[p.fuel]||colors.Other;let m=L.circleMarker([p.lat,p.lon],{radius:5,weight:1,color:"#fff",fillColor:color,fillOpacity:.9}).bindPopup(popup(p));m.addTo(map);markers.push(m)});document.getElementById("loadStatus").textContent=`Showing ${markers.length.toLocaleString("en-IN")} plant markers. ${plants.length.toLocaleString("en-IN")} records loaded; ${plants.filter(p=>p.lat!=null&&p.lon!=null).length.toLocaleString("en-IN")} have coordinates.`}
+function populateFilters(){const keep={fuel:document.getElementById("fuelFilter").value,state:document.getElementById("stateFilter").value,mapFuel:document.getElementById("mapFuel").value,mapState:document.getElementById("mapState").value};let fuels=[...new Set(plants.map(p=>p.fuel))].sort(),states=[...new Set(plants.filter(p=>p.state!=="Unassigned").map(p=>p.state))].sort();for(let id of ["fuelFilter","mapFuel"])document.getElementById(id).innerHTML='<option value="">All fuel types</option>'+fuels.map(f=>`<option value="${esc(f)}">${esc(f)}</option>`).join("");for(let id of ["stateFilter","mapState"])document.getElementById(id).innerHTML='<option value="">All states / UTs</option>'+states.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join("");document.getElementById("fuelFilter").value=keep.fuel;document.getElementById("stateFilter").value=keep.state;document.getElementById("mapFuel").value=keep.mapFuel;document.getElementById("mapState").value=keep.mapState}
+function sidePanels(){let mapped=plants.filter(p=>p.state!=="Unassigned");let counts={};mapped.forEach(p=>counts[p.state]=(counts[p.state]||0)+1);let sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);let max=sorted[0]?.[1]||1;document.getElementById("stateCounts").innerHTML=sorted.length?sorted.map(([s,n])=>`<div class="state-row"><span class="state-name">${esc(s)}</span><span class="statebar"><i style="width:${n/max*100}%"></i></span><span class="state-num">${n}</span></div>`).join("")+`<div class="status">Unassigned / no coordinate match: ${plants.length-mapped.length}</div>`:"State-wise counts will appear when geographic data loads.";let fc={};plants.forEach(p=>fc[p.fuel]=(fc[p.fuel]||0)+1);document.getElementById("fuelCounts").innerHTML=Object.entries(fc).sort((a,b)=>b[1]-a[1]).map(([f,n])=>`<span class="chip"><b>${esc(f)}</b> ${n.toLocaleString("en-IN")}</span>`).join("");document.getElementById("legend").innerHTML=Object.entries(colors).map(([f,c])=>`<span><i class="dot" style="background:${c}"></i>${f}</span>`).join("")}
+function getFilteredRows(){let q=document.getElementById("search").value.toLowerCase(),f=document.getElementById("fuelFilter").value,s=document.getElementById("stateFilter").value,c=document.getElementById("coordFilter").value;let arr=plants.filter(p=>(!f||p.fuel===f)&&(!s||p.state===s)&&(!c||(c==="yes"?(p.lat!=null&&p.lon!=null):(p.lat==null||p.lon==null)))&&[p.name,p.state,p.rawFuel,p.owner,p.fuel].join(" ").toLowerCase().includes(q));arr.sort((a,b)=>{let x=a[sortKey],y=b[sortKey];if(x==null)return 1;if(y==null)return -1;return (typeof x==="number"&&typeof y==="number"?x-y:String(x).localeCompare(String(y)))*sortDir});return arr}
+function renderTable(){let arr=getFilteredRows(),pages=Math.max(1,Math.ceil(arr.length/TABLE_PAGE_SIZE));tablePage=Math.min(Math.max(1,tablePage),pages);let start=(tablePage-1)*TABLE_PAGE_SIZE,visible=arr.slice(start,start+TABLE_PAGE_SIZE);document.getElementById("rows").innerHTML=visible.map(p=>`<tr><td><b>${esc(p.name)}</b></td><td>${esc(p.state)}</td><td><span class="tag">${esc(p.rawFuel||p.fuel)}</span></td><td class="num">${fmt(p.capacity)}</td><td>${esc(p.owner||"—")}</td><td class="num">${esc(p.year||"—")}</td><td class="num">${fmt(p.lat)}</td><td class="num">${fmt(p.lon)}</td></tr>`).join("");document.getElementById("tableStatus").innerHTML=`<div class="table-pager"><span>Showing ${arr.length?start+1:0}–${Math.min(start+TABLE_PAGE_SIZE,arr.length)} of ${arr.length.toLocaleString("en-IN")} filtered records (${plants.length.toLocaleString("en-IN")} total).</span><div><button id="prevPage" ${tablePage<=1?"disabled":""}>Previous</button> <span>Page ${tablePage} of ${pages}</span> <button id="nextPage" ${tablePage>=pages?"disabled":""}>Next</button></div></div>`;document.getElementById("prevPage").addEventListener("click",()=>{tablePage--;renderTable()});document.getElementById("nextPage").addEventListener("click",()=>{tablePage++;renderTable()})}
+function chartCommon(){return {responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{labels:{boxWidth:10,usePointStyle:true,font:{size:10}}},tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${Number(ctx.raw).toLocaleString("en-IN",{maximumFractionDigits:1})}`}}}}}
+function renderBaseCharts(){if(typeof Chart==="undefined")return;const palette=["#f28b25","#1686cf","#1aa66d","#7652d6","#e0b12f","#d83d83","#13a6b5","#9a6b42","#7b8798","#55a6e8"];const capacityByFuel={};plants.forEach(p=>{if(p.capacity!=null&&p.capacity>0)capacityByFuel[p.fuel]=(capacityByFuel[p.fuel]||0)+p.capacity});const fuelEntries=Object.entries(capacityByFuel).sort((a,b)=>b[1]-a[1]);if(charts.fuel)charts.fuel.destroy();if(fuelEntries.length)charts.fuel=new Chart(document.getElementById("fuelCapacityChart"),{type:"doughnut",data:{labels:fuelEntries.map(x=>x[0]),datasets:[{data:fuelEntries.map(x=>+x[1].toFixed(2)),backgroundColor:palette,borderColor:"#fff",borderWidth:3,hoverOffset:7}]},options:{...chartCommon(),cutout:"64%",plugins:{...chartCommon().plugins,legend:{position:"bottom",labels:{...chartCommon().plugins.legend.labels,padding:12}}}}});const bands=[["Under 100 MW",0,100],["100–499 MW",100,500],["500–999 MW",500,1000],["1,000 MW+",1000,Infinity]];const bandCounts=bands.map(([label,lo,hi])=>plants.filter(p=>p.capacity!=null&&p.capacity>0&&p.capacity>=lo&&p.capacity<hi).length);if(charts.sizes)charts.sizes.destroy();charts.sizes=new Chart(document.getElementById("stationSizeChart"),{type:"bar",data:{labels:bands.map(x=>x[0]),datasets:[{data:bandCounts,backgroundColor:["#17a6b5","#1686cf","#7652d6","#f28b25"],borderRadius:7,borderSkipped:false}]},options:{...chartCommon(),plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw.toLocaleString("en-IN")} stations`}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{beginAtZero:true,grid:{color:"#edf2f7"},ticks:{font:{size:9}}}}}})}
+function renderStateChart(){if(typeof Chart==="undefined"||!stateDataReady)return;const stateCounts={};plants.forEach(p=>{if(p.state&&p.state!=="Unassigned")stateCounts[p.state]=(stateCounts[p.state]||0)+1});const topStates=Object.entries(stateCounts).sort((a,b)=>b[1]-a[1]).slice(0,10);if(charts.states)charts.states.destroy();charts.states=new Chart(document.getElementById("stateCountChart"),{type:"bar",data:{labels:topStates.map(x=>x[0]),datasets:[{data:topStates.map(x=>x[1]),backgroundColor:topStates.map((_,i)=>`hsl(${198+i*9} 72% ${48+i*1.5}%)`),borderRadius:6,borderSkipped:false}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw.toLocaleString("en-IN")} stations`}}},scales:{x:{beginAtZero:true,grid:{color:"#edf2f7"},ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:9}}}}}})}
+function renderTrendChart(){
+  if(typeof Chart==="undefined"||!generationDataReady||!generationSummary)return;
+  const yearly=generationSummary;
+  const years=yearly.map(x=>x.year);
+  if(charts.trend)charts.trend.destroy();
+  const canvas=document.getElementById("yearTrendChart");
+  const hasData=yearly.some(x=>x.stations>0&&Number.isFinite(x.total));
+  if(!hasData){
+    document.getElementById("trendStatus").textContent="The India WRI source contains no numeric annual generation records.";
+    return;
+  }
+  document.getElementById("trendStatus").textContent=
+    "Historical generation loaded from the WRI India-only dataset. Figures are GWh reported for individual stations; reporting coverage varies by year.";
+  charts.trend=new Chart(canvas,{
+    type:"line",
+    data:{
+      labels:years,
+      datasets:[
+        {label:"Reported generation",data:yearly.map(x=>x.stations?+x.total.toFixed(2):null),borderColor:"#087fc4",backgroundColor:"rgba(8,127,196,.13)",fill:true,tension:.32,pointRadius:4,pointHoverRadius:6,spanGaps:false},
+        {label:"Stations reporting",data:yearly.map(x=>x.stations),borderColor:"#16a56b",backgroundColor:"#16a56b",borderDash:[5,4],tension:.25,pointRadius:3,yAxisID:"y1"}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:"index",intersect:false},
+      plugins:{
+        legend:{position:"bottom",labels:{boxWidth:10,usePointStyle:true,font:{size:10}}},
+        tooltip:{callbacks:{label:ctx=>ctx.datasetIndex===0?`Generation: ${Number(ctx.raw).toLocaleString("en-IN")} GWh`:`Stations reporting: ${Number(ctx.raw).toLocaleString("en-IN")}`}}
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:9}}},
+        y:{beginAtZero:true,title:{display:true,text:"Generation (GWh)",font:{size:9}},grid:{color:"#edf2f7"},ticks:{font:{size:9},callback:v=>Number(v).toLocaleString("en-IN")}},
+        y1:{beginAtZero:true,position:"right",title:{display:true,text:"Stations",font:{size:9}},grid:{drawOnChartArea:false},ticks:{font:{size:9}}}
+      }
+    }
+  });
+}
+function loadGenerationData(){
+  if(generationDataReady)return Promise.resolve(generationSummary);
+  if(generationPromise)return generationPromise;
+  const status=document.getElementById("trendStatus");
+  status.textContent="Loading the compact India-only historical generation dataset…";
+  generationPromise=(async()=>{
+    try{
+      let generationText="";
+      let sourceUsed="";
+      let lastError=null;
+      for(const url of GENERATION_URLS){
+        try{
+          const response=await fetch(url,{cache:"force-cache",mode:"cors"});
+          if(!response.ok)throw new Error("HTTP "+response.status+" from "+url);
+          const candidate=await response.text();
+          if(!candidate||!candidate.toLowerCase().includes("generation_gwh_2013"))
+            throw new Error("The downloaded file does not contain the expected WRI annual-generation columns.");
+          generationText=candidate;
+          sourceUsed=url;
+          break;
+        }catch(error){lastError=error;console.warn("WRI India source attempt failed:",url,error);}
+      }
+      if(!generationText)throw new Error("Could not download the WRI India generation file. "+(lastError?.message||"Please retry."));
+      const parsed=Papa.parse(generationText,{header:true,skipEmptyLines:true,dynamicTyping:false});
+      if(parsed.errors?.length)console.warn("WRI India CSV parse warnings:",parsed.errors.slice(0,3));
+      const years=[2013,2014,2015,2016,2017,2018,2019];
+      const totals=Object.fromEntries(years.map(year=>[year,{year,total:0,stations:0}]));
+      const seen=new Set();
+      for(const row of parsed.data){
+        const country=String(val(row,["country","Country","country_long"])).trim().toLowerCase();
+        if(country!=="ind"&&country!=="india")continue;
+        const id=String(val(row,["gppd_idnr","Gppd Idnr"])).trim();
+        const name=norm(val(row,["name","Name"]));
+        const key=id||name;
+        if(!key||seen.has(key))continue;
+        seen.add(key);
+        for(const year of years){
+          const value=num(val(row,[`generation_gwh_${year}`,`Generation GWh ${year}`]));
+          if(value!==null){totals[year].total+=value;totals[year].stations++;}
+        }
+      }
+      generationSummary=years.map(year=>totals[year]);
+      const reportingYears=generationSummary.filter(x=>x.stations>0);
+      if(!reportingYears.length)throw new Error("The India file downloaded, but it contained no numeric generation observations for 2013–2019.");
+      generationDataReady=true;
+      const stationCounts=reportingYears.map(x=>x.stations);
+      const maxStations=Math.max(...stationCounts);
+      status.textContent=`Historical generation loaded: ${reportingYears.length} reporting years; up to ${maxStations.toLocaleString("en-IN")} Indian stations in a year. Source: WRI India dataset.`;
+      if(window.Chart)renderTrendChart();
+      console.info("WRI India generation source:",sourceUsed,"Rows:",parsed.data.length,"Year summary:",generationSummary);
+      return generationSummary;
+    }catch(error){
+      generationPromise=null;
+      status.innerHTML='Historical generation could not be loaded: '+esc(error.message)+' <button type="button" id="retryTrend" style="margin-left:6px;padding:4px 9px;border:1px solid #9bb6cf;border-radius:6px;background:#fff;color:#17446c;cursor:pointer">Retry</button>';
+      const retry=document.getElementById("retryTrend");
+      if(retry)retry.addEventListener("click",()=>{
+        retry.disabled=true;
+        retry.textContent="Retrying…";
+        Promise.all([ensurePapa(),ensureCharts()]).then(loadGenerationData).catch(err=>console.warn("Historical generation retry:",err));
+      },{once:true});
+      console.warn("Historical generation load failed:",error);
+      throw error;
+    }
+  })();
+  return generationPromise;
+}
+function observeOnce(el,callback,rootMargin="250px"){if(!el)return;if(!("IntersectionObserver" in window)){callback();return}const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer.disconnect();callback()}},{rootMargin});observer.observe(el)}
+function setupLazySections(){
+  observeOnce(document.querySelector(".insight-grid"),()=>ensureCharts().catch(e=>console.warn(e)),"300px");
+  observeOnce(document.getElementById("stateCountChart"),()=>ensureStateData().then(()=>ensureCharts()).catch(e=>console.warn(e)),"350px");
+  const startTrend=()=>Promise.all([ensurePapa(),ensureCharts()]).then(loadGenerationData).catch(e=>console.warn("Yearly trend initialisation:",e));
+  observeOnce(document.getElementById("yearTrendChart"),startTrend,"700px");
+  const trendLink=document.querySelector('.side-nav a[href="#yearTrendChart"]');
+  if(trendLink&&!trendLink.dataset.trendBound){trendLink.dataset.trendBound="true";trendLink.addEventListener("click",startTrend);}
+  observeOnce(document.getElementById("mapPanel"),()=>initMap(),"300px");
+} 
+async function load(){try{const status=document.getElementById("loadStatus");status.textContent="Loading the station inventory…";await ensurePapa();const [csvRes,ceaRes]=await Promise.all([fetch(CSV_URL,{cache:"force-cache"}),fetch(CEA_CSV_URL,{cache:"no-cache"}).catch(()=>null)]);if(!csvRes.ok)throw new Error("Could not download historical baseline CSV (HTTP "+csvRes.status+").");const csvText=await csvRes.text();const ceaText=(ceaRes&&ceaRes.ok)?await ceaRes.text():"name,state,rawFuel,capacity,owner,year,lat,lon,source,source_as_of\n";const parsed=Papa.parse(csvText,{header:true,skipEmptyLines:true,dynamicTyping:false});if(parsed.errors?.length)console.warn("Inventory CSV parse warnings:",parsed.errors.slice(0,3));let allRows=parsed.data.map(r=>{const name=val(r,["Name","name","Plant Name"]),rawFuel=val(r,["Primary Fuel","primary_fuel","Fuel"]),lat=num(val(r,["Latitude","latitude"])),lon=num(val(r,["Longitude","longitude"])),owner=val(r,["Owner","owner"]);return {name:name||"Unnamed plant",id:val(r,["Gppd Idnr","gppd_idnr"]),capacity:num(val(r,["Capacity Mw","capacity_mw"])),lat,lon,rawFuel:rawFuel||"Other",fuel:fuelGroup(rawFuel),owner,year:val(r,["Commissioning Year","commissioning_year"]),generationByYear:Object.fromEntries([2013,2014,2015,2016,2017,2018,2019].map(y=>[y,num(val(r,[`generation_gwh_${y}`,`Generation GWh ${y}`]))])),state:"Unassigned",source:"WRI GPPD v1.3.0"}}).filter(p=>p.name&&p.name!=="Unnamed plant");const ceaParsed=Papa.parse(ceaText,{header:true,skipEmptyLines:true,dynamicTyping:false});const seen=new Set(allRows.map(p=>norm(p.name)));const ceaRows=ceaParsed.data.map(r=>{const name=val(r,["name","station","plant"]),rawFuel=val(r,["rawFuel","fuel","primary_fuel"])||"Other";return {name,id:"CEA-"+norm(name),capacity:num(val(r,["capacity","capacity_mw"])),lat:num(val(r,["lat","latitude"])),lon:num(val(r,["lon","longitude"])),rawFuel,fuel:fuelGroup(rawFuel),owner:val(r,["owner","utility"]),year:val(r,["year","commissioning_year"]),state:val(r,["state"])||"Unassigned",source:val(r,["source"])||"CEA/NPP"}}).filter(p=>p.name&&!seen.has(norm(p.name)));plants=allRows.concat(ceaRows);document.getElementById("total").textContent=plants.length.toLocaleString("en-IN");document.getElementById("mapped").textContent=plants.filter(p=>p.lat!=null&&p.lon!=null).length.toLocaleString("en-IN");document.getElementById("fuels").textContent=new Set(plants.map(p=>p.fuel)).size;document.getElementById("states").textContent="…";populateFilters();sidePanels();renderTable();document.getElementById("loadError").style.display="none";status.textContent=`Inventory ready: ${fmt(plants.length)} records, including industrial/captive facilities; ${fmt(ceaRows.length)} CEA/NPP feed additions. Charts, state assignment, historical generation and map load as needed.`;setupLazySections()}catch(e){document.getElementById("loadError").style.display="block";document.getElementById("loadError").textContent=e.message+" Use the source links above to open the full inventory and official live map.";document.getElementById("loadStatus").textContent="Data loading failed. This dashboard needs an internet connection.";console.error(e)}}
+["mapFuel","mapState","mapStatus"].forEach(id=>document.getElementById(id).addEventListener("change",drawMarkers));["search","fuelFilter","stateFilter","coordFilter"].forEach(id=>document.getElementById(id).addEventListener(id==="search"?"input":"change",()=>{tablePage=1;renderTable()}));document.querySelectorAll("th[data-k]").forEach(th=>th.addEventListener("click",()=>{const k=th.dataset.k;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=1}tablePage=1;renderTable()}));
+document.getElementById("downloadCsv").addEventListener("click",()=>{if(!plants.length)return;const head=["Plant","State","Primary fuel","Capacity MW","Owner","Commissioning year","Latitude","Longitude","GPPD ID"];const rows=plants.map(p=>[p.name,p.state,p.rawFuel,p.capacity??"",p.owner,p.year,p.lat??"",p.lon??"",p.id]);const csv=[head,...rows].map(r=>r.map(v=>'"'+String(v??"").replaceAll('"','""')+'"').join(",")).join("\r\n");const a=document.createElement("a");const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.href=url;a.download="india_power_plants_wri_gppd_v1_3.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+load();
+document.querySelectorAll(".side-nav a[href^='#']").forEach(a=>a.addEventListener("click",()=>{document.querySelectorAll(".side-nav a").forEach(x=>x.classList.remove("active"));a.classList.add("active")}));
+
+/* Liquid-glass entrance motion: progressive enhancement only. */
+(function(){
+  const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduced || !("IntersectionObserver" in window)) return;
+  const targets = document.querySelectorAll(
+    "main > .notice, main > .toolbar, main > .kpis, main > .insight-grid, main > .layout > div > .panel, main > .layout > aside > .panel, main > .source-card"
+  );
+  if(!targets.length) return;
+  document.documentElement.classList.add("motion-ready");
+  targets.forEach((el,i)=>{el.classList.add("reveal-item");el.style.transitionDelay=(Math.min(i%4,3)*65)+"ms";});
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target);}
+    });
+  },{threshold:.08,rootMargin:"0px 0px -35px 0px"});
+  targets.forEach(el=>observer.observe(el));
+})();
+
 </script></body></html>
